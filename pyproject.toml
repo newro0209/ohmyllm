@@ -45,3 +45,7 @@ ohmyllm-tokenizer = "train_tokenizer:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"train_model.py" = "train_model.py"
+"train_tokenizer.py" = "train_tokenizer.py"
