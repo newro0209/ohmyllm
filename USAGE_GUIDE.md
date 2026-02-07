@@ -19,10 +19,10 @@
 git clone https://github.com/newro0209/ohmyllm.git
 cd ohmyllm
 
-# 의존성 설치
-pip install -r requirements.txt
+# uv 사용 (권장)
+uv pip install -e .
 
-# 또는 패키지 설치
+# 또는 pip 사용
 pip install -e .
 ```
 

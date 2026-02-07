@@ -86,8 +86,9 @@
 
 ### 기본 워크플로우
 ```bash
-# 1. 의존성 설치
-pip install -r requirements.txt
+# 1. 의존성 설치 (uv 권장)
+uv pip install -e .
+# 또는: pip install -e .
 
 # 2. 도메인 데이터 준비
 # data/train.txt에 학습 데이터 작성
@@ -121,8 +122,7 @@ ohmyllm/
 ├── test_basic.py          # 단위 테스트
 ├── README.md              # 프로젝트 개요
 ├── USAGE_GUIDE.md         # 사용법 가이드
-├── requirements.txt       # 의존성
-└── setup.py              # 패키지 설정
+└── pyproject.toml         # 프로젝트 설정 및 의존성 (uv 호환)
 ```
 
 ## 🎓 학습된 내용

@@ -17,8 +17,14 @@
 
 ### 설치
 
+**uv 사용 (권장):**
 ```bash
-pip install -r requirements.txt
+uv pip install -e .
+```
+
+**pip 사용:**
+```bash
+pip install -e .
 ```
 
 ### 사용법
@@ -49,7 +55,7 @@ ohmyllm/
 │   └── utils.py         # 유틸리티 함수
 ├── train_tokenizer.py   # 토크나이저 학습 스크립트
 ├── train_model.py       # 모델 학습 스크립트
-└── requirements.txt     # 의존성 패키지
+└── pyproject.toml       # 프로젝트 설정 및 의존성
 ```
 
 ## 🔧 기술 스택
