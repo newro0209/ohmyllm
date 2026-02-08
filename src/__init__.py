@@ -1,5 +1,5 @@
 """
-OhMyLLM - 일본어 GPT-2 모델 어휘 교체 및 임베딩 미세조정 도구
+OhMyLLM - 한국어 GPT-2 모델 어휘 교체 및 임베딩 미세조정 도구
 """
 
 from .vocabulary import VocabularyReplacer

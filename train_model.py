@@ -36,7 +36,7 @@ logger = logging.getLogger(__name__)
 def main():
     """메인 함수"""
     parser = argparse.ArgumentParser(
-        description="일본어 GPT-2 모델 어휘 교체 및 임베딩 미세조정"
+        description="한국어 GPT-2 모델 어휘 교체 및 임베딩 미세조정"
     )
 
     parser.add_argument(
@@ -52,7 +52,7 @@ def main():
     config = load_config(args.config)
 
     logger.info("=" * 60)
-    logger.info("일본어 GPT-2 모델 어휘 교체 및 임베딩 미세조정")
+    logger.info("한국어 GPT-2 모델 어휘 교체 및 임베딩 미세조정")
     logger.info("=" * 60)
 
     # 시드 설정
@@ -60,7 +60,7 @@ def main():
 
     # 기본 모델 및 토크나이저 로드
     logger.info("\n[1단계] 기본 모델 로드")
-    base_model_name = config.get("base_model", "rinna/japanese-gpt2-xsmall")
+    base_model_name = config.get("base_model", "openai-community/gpt2")
     logger.info(f"모델: {base_model_name}")
 
     old_tokenizer = AutoTokenizer.from_pretrained(base_model_name)

@@ -1,5 +1,5 @@
 {
-  "base_model": "rinna/japanese-gpt2-xsmall",
+  "base_model": "openai-community/gpt2",
   "new_tokenizer_path": "./tokenizer",
   "train_data_path": "./data/train.txt",
   "output_dir": "./output",

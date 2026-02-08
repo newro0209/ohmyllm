@@ -19,7 +19,7 @@ def main():
 
     # 1. 기본 모델 로드
     print("\n[1] 기본 모델 로드...")
-    model_name = "rinna/japanese-gpt2-xsmall"
+    model_name = "openai-community/gpt2"
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     model = AutoModelForCausalLM.from_pretrained(model_name)
     print(f"✓ 모델 로드 완료: {model_name}")

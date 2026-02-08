@@ -1,71 +1,75 @@
-# OhMyLLM 🤖
+# OhMyLLM
 
-일본어 GPT-2 모델을 위한 어휘 교체 및 임베딩 미세조정 도구
+GPT-2 모델 어휘 교체 및 임베딩 미세조정 도구
 
-## 📝 프로젝트 개요
+## 설치
 
-이 프로젝트는 사전학습된 `rinna/japanese-gpt2-xsmall` 모델을 기반으로 도메인 특화 어휘 교체와 임베딩 레이어 미세조정을 통해 높은 성능과 속도를 달성하는 언어 모델을 만드는 도구입니다.
-
-## ✨ 주요 기능
-
-- 🔄 **어휘 교체 (Vocabulary Replacement)**: 도메인 특화 토크나이저로 모델의 어휘를 교체
-- 🎯 **임베딩 미세조정 (Embedding Fine-tuning)**: 새로운 어휘에 맞춰 임베딩 레이어 초기화 및 학습
-- ⚡ **빠른 학습**: 전체 모델이 아닌 임베딩 레이어 중심 학습으로 빠른 도메인 적응
-- 🤗 **Hugging Face 통합**: transformers, datasets, tokenizers 라이브러리 활용
-
-## 🚀 빠른 시작
-
-### 설치
-
-**uv 사용 (권장):**
 ```bash
 uv pip install -e .
 ```
 
-**pip 사용:**
+## 사용법
+
+### 1. 토크나이저 학습
 ```bash
-pip install -e .
+python train_tokenizer.py --data_path data/corpus.txt --output_dir tokenizer/
 ```
 
-### 사용법
-
-1. **도메인 데이터 준비**
-```python
-# data/train.txt에 학습 데이터 준비
-```
-
-2. **토크나이저 학습**
-```bash
-python train_tokenizer.py --data_path data/train.txt --output_dir tokenizer/
-```
-
-3. **어휘 교체 및 임베딩 미세조정**
+### 2. 모델 학습
 ```bash
 python train_model.py --config config/train_config.json
 ```
 
-## 📁 프로젝트 구조
+### 3. Python에서 사용
+```python
+from src.vocabulary import replace_vocabulary
+from src.embedding import finetune_embeddings
+
+# 어휘 교체
+model, tokenizer = replace_vocabulary(
+    base_model="openai-community/gpt2",
+    new_tokenizer_path="./tokenizer",
+    reinit_strategy="mean"
+)
+
+# 임베딩 미세조정
+finetune_embeddings(
+    model=model,
+    tokenizer=tokenizer,
+    train_data_path="./data/corpus.txt",
+    output_dir="./output",
+    num_epochs=3,
+    batch_size=4
+)
+```
+
+## 설정 (config/train_config.json)
+
+```json
+{
+  "base_model": "openai-community/gpt2",
+  "new_tokenizer_path": "./tokenizer",
+  "train_data_path": "./data/corpus.txt",
+  "output_dir": "./output",
+  "reinit_strategy": "mean",
+  "block_size": 512,
+  "batch_size": 4,
+  "num_epochs": 3,
+  "learning_rate": 5e-5,
+  "train_embeddings": true,
+  "train_lm_head": true,
+  "train_transformer": false
+}
+```
+
+## 프로젝트 구조
 
 ```
-ohmyllm/
 ├── config/              # 설정 파일
 ├── src/                 # 소스 코드
-│   ├── vocabulary.py    # 어휘 교체 모듈
-│   ├── embedding.py     # 임베딩 미세조정 모듈
-│   └── utils.py         # 유틸리티 함수
-├── train_tokenizer.py   # 토크나이저 학습 스크립트
-├── train_model.py       # 모델 학습 스크립트
-└── pyproject.toml       # 프로젝트 설정 및 의존성
+│   ├── vocabulary.py    # 어휘 교체
+│   ├── embedding.py     # 임베딩 미세조정
+│   └── utils.py         # 유틸리티
+├── train_tokenizer.py   # 토크나이저 학습
+└── train_model.py       # 모델 학습
 ```
-
-## 🔧 기술 스택
-
-- Python 3.8+
-- transformers
-- datasets
-- tokenizers
-- torch
-
-## 📄 라이선스
-
-MIT License
